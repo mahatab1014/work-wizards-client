@@ -20,7 +20,7 @@ import Img5 from "/assets/images/slider/sean-pollock-PhYq704ffdA-unsplash-min.jp
 
 const HeroSlider = () => {
   return (
-    <section className="my-10">
+    <section className="">
       <Swiper
         spaceBetween={30}
         effect="fade"
@@ -53,12 +53,8 @@ const HeroSlider = () => {
                   whenever and wherever you need them.
                 </p>
                 <div className="space-x-3">
-                  <button className="btn bg-primary-color hover:bg-primary-color text-white border-none normal-case">
-                    Find Jobs
-                  </button>
-                  <button className="btn btn-outline border-primary-color hover:bg-primary-color text-white normal-case">
-                    Post Jobs
-                  </button>
+                  <button className="primary-button">Find Jobs</button>
+                  <button className="primary-button-outline">Post Jobs</button>
                 </div>
               </div>
             </div>
@@ -85,12 +81,8 @@ const HeroSlider = () => {
                   whenever and wherever you need them.
                 </p>
                 <div className="space-x-3">
-                  <button className="btn bg-primary-color hover:bg-primary-color text-white border-none normal-case">
-                    Find Jobs
-                  </button>
-                  <button className="btn btn-outline border-primary-color hover:bg-primary-color text-white normal-case">
-                    Post Jobs
-                  </button>
+                  <button className="primary-button">Find Jobs</button>
+                  <button className="primary-button-outline">Post Jobs</button>
                 </div>
               </div>
             </div>
@@ -118,12 +110,8 @@ const HeroSlider = () => {
                   whenever and wherever you need them.
                 </p>
                 <div className="space-x-3">
-                  <button className="btn bg-primary-color hover:bg-primary-color text-white border-none normal-case">
-                    Find Jobs
-                  </button>
-                  <button className="btn btn-outline border-primary-color hover:bg-primary-color text-white normal-case">
-                    Post Jobs
-                  </button>
+                  <button className="primary-button">Find Jobs</button>
+                  <button className="primary-button-outline">Post Jobs</button>
                 </div>
               </div>
             </div>
@@ -150,12 +138,8 @@ const HeroSlider = () => {
                   whenever and wherever you need them.
                 </p>
                 <div className="space-x-3">
-                  <button className="btn bg-primary-color hover:bg-primary-color text-white border-none normal-case">
-                    Find Jobs
-                  </button>
-                  <button className="btn btn-outline border-primary-color hover:bg-primary-color text-white normal-case">
-                    Post Jobs
-                  </button>
+                  <button className="primary-button">Find Jobs</button>
+                  <button className="primary-button-outline">Post Jobs</button>
                 </div>
               </div>
             </div>
