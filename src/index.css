@@ -9,3 +9,13 @@
 .primary-button-outline {
   @apply btn btn-outline border-primary-color hover:bg-primary-color text-white normal-case;
 }
+
+.section-title {
+  @apply sm:w-2/3 mx-auto text-center space-y-4;
+}
+.section-title > h2 {
+  @apply text-3xl md:text-4xl font-medium;
+}
+.section-title > p {
+  @apply text-lg;
+}
