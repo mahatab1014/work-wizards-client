@@ -7,7 +7,7 @@ const PrimaryNav = () => {
         <NavLink to="/">Home</NavLink>
       </li>
       <li>
-        <NavLink to="/add-job">Add Job</NavLink>
+        <NavLink to="/add-jobs">Add Job</NavLink>
       </li>
       <li>
         <NavLink to="/my-posted-jobs">My Posted Jobs</NavLink>
@@ -16,7 +16,7 @@ const PrimaryNav = () => {
         <NavLink to="/my-bids">My Bids</NavLink>
       </li>
       <li>
-        <NavLink to="/my-bids">Bid Requests</NavLink>
+        <NavLink to="/bid-requests">Bid Requests</NavLink>
       </li>
     </>
   );
@@ -63,9 +63,9 @@ const PrimaryNav = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{menuList}</ul>
       </div>
-      {/* <div className="navbar-end">
-        <a className="btn">Button</a>
-      </div> */}
+      <div className="navbar-end">
+        <Link to="login" className="primary-button w-1/4 !btn-sm">Login</Link>
+      </div>
     </nav>
   );
 };
