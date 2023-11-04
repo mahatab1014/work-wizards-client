@@ -1,0 +1,19 @@
+.swiper-button-prev {
+  left: inherit;
+  right: 0;
+  margin-right: 50px;
+}
+.swiper-button-prev::after {
+  font-size: 1.8rem;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  color: white;
+  background: #ff3811;
+  padding: 10px;
+
+  top: 90%;
+}
+.swiper-button-next::after {
+  font-size: 1.8rem;
+}
