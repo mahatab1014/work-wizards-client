@@ -1,11 +1,18 @@
 import Lottie from "lottie-react";
 import AddJobsLottie from "./add-jobs.json";
+import useAuth from "../../Hooks/useAuth";
+import useAxios from "../../Hooks/useAxios";
 const AddJobs = () => {
+  const { user } = useAuth();
+  const exios = useAxios();
+
   const handleJobPost = (e) => {
     e.preventDefault();
     const form = e.target;
-    console.log(e);
-    console.log(form);
+
+    const userEmail = user.email;
+    const userName = user.displayName;
+    const userPhotoURL = user.photoURL;
     const jobTitle = form.job_title.value;
     const category = form.category.value;
     const deadline = form.deadline.value;
@@ -13,15 +20,22 @@ const AddJobs = () => {
     const minimum_price = form.minimum_price.value;
     const maximum_price = form.maximum_price.value;
 
-    console.log(`
-        ${jobTitle}
-        ${category}
-        ${deadline}
-        ${jobDescription}
-        ${minimum_price}
-        ${maximum_price}
-        
-        `);
+    const postData = {
+      user_email: userEmail,
+      user_name: userName,
+      user_photoURL: userPhotoURL,
+      job_title: jobTitle,
+      category: category,
+      deadline: deadline,
+      description: jobDescription,
+      minimum_price: minimum_price,
+      maximum_price: maximum_price,
+    };
+
+    exios
+      .post("/api/v1/job-post", postData)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -79,7 +93,7 @@ const AddJobs = () => {
               >
                 <option value="Web Development">Web Development</option>
                 <option value="Digital Marketing">Digital Marketing</option>
-                <option value="Graphic Design">Graphic Design</option>
+                <option value="Graphics Design">Graphics Design</option>
               </select>
             </div>
             <div>
