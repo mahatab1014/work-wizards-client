@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import Tabs, { Tab } from "react-best-tabs";
 import "react-best-tabs/dist/index.css";
-import useAxios from "../../../Hooks/useAxios";
+import useAxiosS from "../../../Hooks/useAxios";
 import JobPostCard from "./JobPostCard";
 
 const BrowseByCategory = () => {
   const [postData, setPostData] = useState([]);
   const [category, setCategory] = useState("Web Development");
-  const exios = useAxios();
+  const exios = useAxiosS();
 
   useEffect(() => {
-    exios.get(`/api/v1/job-posts?category=${category}`).then((data) => {
+    exios.get(`/job-posts?category=${category}`).then((data) => {
       setPostData(data.data);
     });
   }, [exios, category]);
@@ -51,7 +51,7 @@ const BrowseByCategory = () => {
           </div>
         </Tab>
         <Tab title="Graphics Design" className="mr-3">
-          <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-5"> 
+          <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-5">
             {postData?.map((post) => (
               <JobPostCard key={post._id} post={post} />
             ))}

@@ -1,10 +1,10 @@
 import Lottie from "lottie-react";
 import AddJobsLottie from "./add-jobs.json";
 import useAuth from "../../Hooks/useAuth";
-import useAxios from "../../Hooks/useAxios";
+import useAxiosS from "../../Hooks/useAxios";
 const AddJobs = () => {
   const { user } = useAuth();
-  const exios = useAxios();
+  const exios = useAxiosS();
 
   const handleJobPost = (e) => {
     e.preventDefault();
@@ -33,7 +33,7 @@ const AddJobs = () => {
     };
 
     exios
-      .post("/api/v1/job-post", postData)
+      .post("/job-post", postData)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
