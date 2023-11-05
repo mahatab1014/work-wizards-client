@@ -1,15 +1,43 @@
 import { Link } from "react-router-dom";
 import logoLight from "/assets/images/logo/logo_light.png";
 import ContinueWithSocialMedia from "./ContinueWithSocialMedia";
+import { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const handleLogin = (e) => {
-        e.preventDefault()
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(email, password)
+  const [errorMessage, setErrorMessage] = useState("");
+  const { loginUserWithEmailAndPassword } = useAuth();
+  const handleLogin = (e) => {
+    e.preventDefault();
+    setErrorMessage("");
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+
+    if (password.length < 6) {
+      setErrorMessage("Please enter a valid password");
+      return;
     }
+
+    loginUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        const userName = user.user.displayName;
+        Swal.fire({
+          title: `Login successful`,
+          html: `Welcome back! <strong>${userName}</strong>`,
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
+      })
+      .catch((error) => {
+        if (error.code === "auth/invalid-login-credentials") {
+          setErrorMessage("Email or password is invalid");
+        }
+      });
+  };
   return (
     <section className="bg-white dark:bg-gray-900 py-10">
       <div className="flex items-center justify-center">
@@ -33,6 +61,14 @@ const Login = () => {
               sign up
             </Link>
           </div>
+
+          {errorMessage && (
+            <div className="mt-6">
+              <p className="bg-primary-color px-3 py-1 text-white font-medium rounded-lg">
+                {errorMessage}
+              </p>
+            </div>
+          )}
 
           <div className="relative flex items-center mt-6">
             <span className="absolute">
@@ -88,7 +124,7 @@ const Login = () => {
 
           <div className="mt-6">
             <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-              Sign Up
+              Sign In
             </button>
 
             <div className="mt-6 text-center ">

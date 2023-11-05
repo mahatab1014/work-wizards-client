@@ -2,11 +2,16 @@ import { Link } from "react-router-dom";
 import logoLight from "/assets/images/logo/logo_light.png";
 import ContinueWithSocialMedia from "./ContinueWithSocialMedia";
 import { useState } from "react";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Registration = () => {
   const [confirmPass, setConformPass] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleRegistration = (e) => {
+  const { createUserWithEmail } = useAuth();
+
+  const handleRegistration = async (e) => {
     e.preventDefault();
 
     const form = e.target;
@@ -14,7 +19,49 @@ const Registration = () => {
     const email = form.email.value;
     const photo = form.photo.value;
     const password = form.password.value;
-    console.log(name, email, password, photo, confirmPass);
+
+    setErrorMessage("");
+
+    try {
+      if (!/(?=.*[A-Z])/.test(password)) {
+        setErrorMessage("Password should be at least one uppercase characters");
+        return;
+      }
+
+      if (!/(?=.*[a-z])/.test(password)) {
+        setErrorMessage("Password should be at least one lowercase characters");
+        return;
+      }
+
+      if (!/(?=.*\d)/.test(password)) {
+        setErrorMessage("Password should be at least one digit");
+        return;
+      }
+
+      if (!/.{6,}/.test(password)) {
+        setErrorMessage("Password should be at least 6 characters");
+        return;
+      }
+
+      if (password !== confirmPass) {
+        setErrorMessage("Passwords do not match");
+        return;
+      }
+
+      await createUserWithEmail(email, password, name, photo).then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Registration successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        setErrorMessage("Email already in use");
+      }
+    }
   };
 
   return (
@@ -41,7 +88,15 @@ const Registration = () => {
             </Link>
           </div>
 
-          <div className="relative flex items-center mt-8">
+          {errorMessage && (
+            <div className="mt-6">
+              <p className="bg-primary-color px-3 py-1 text-white font-medium rounded-lg">
+                {errorMessage}
+              </p>
+            </div>
+          )}
+
+          <div className="relative flex items-center mt-6">
             <span className="absolute">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

@@ -1,4 +1,12 @@
+import useAuth from "../../Hooks/useAuth";
+
 const ContinueWithSocialMedia = () => {
+  const { signInWithGoogle } = useAuth();
+
+  const handleGoogleLogin = () => {
+    signInWithGoogle();
+  };
+
   return (
     <div>
       <div className="flex items-center justify-between mt-4">
@@ -13,6 +21,7 @@ const ContinueWithSocialMedia = () => {
 
       <div className="flex items-center mt-6 -mx-2">
         <button
+          onClick={handleGoogleLogin}
           type="button"
           className="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:bg-blue-400 focus:outline-none"
         >
