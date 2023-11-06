@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useAxios from "../../Hooks/useAxios";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -15,7 +16,45 @@ const JobDetails = () => {
     });
   }, [id, exios]);
 
-  console.log(data);
+  const handleBidNow = (event) => {
+    event.preventDefault();
+    const form = event.target;
+
+    const job_info = data;
+    const bidder_name = form.name.value;
+    const bidder_email = form.email.value;
+    const bidding_amount = form.bidding_amount.value;
+    const bid_description = form.bid_description.value;
+    const bid_deadline = form.deadline.value;
+    const bid_status = "pending";
+
+    const bid_data = {
+      job_info: job_info,
+      bidder_name,
+      bidder_email,
+      bidding_amount,
+      bid_description,
+      bid_deadline,
+      bid_status,
+    };
+
+    exios
+      .post("/job-bid", bid_data)
+      .then((data) => {
+        if (data.status === 200) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your bid has been placed",
+            showConfirmButton: false,
+            timer: 2500,
+          });
+          form.reset();
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <>
       <section>
@@ -70,7 +109,7 @@ const JobDetails = () => {
               </p>
             </div>
           )}
-          <form>
+          <form onSubmit={handleBidNow}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
                 <label
@@ -143,15 +182,15 @@ const JobDetails = () => {
               </div>
               <div className="md:col-span-2">
                 <label
-                  htmlFor="bid_message"
+                  htmlFor="bid_description"
                   className="block text-sm text-gray-500 dark:text-gray-300"
                 >
-                  Message
+                  Bid Message
                 </label>
 
                 <textarea
-                  name="bid_message"
-                  id="bid_message"
+                  name="bid_description"
+                  id="bid_description"
                   className="block  mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
                   required
                 ></textarea>
