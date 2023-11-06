@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logoLight from "/assets/images/logo/logo_light.png";
 import ContinueWithSocialMedia from "./ContinueWithSocialMedia";
 import { useState } from "react";
@@ -8,6 +8,10 @@ import Swal from "sweetalert2";
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const { loginUserWithEmailAndPassword } = useAuth();
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleLogin = (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -30,6 +34,12 @@ const Login = () => {
           timer: 2000,
           timerProgressBar: true,
           showConfirmButton: false,
+        }).then(() => {
+          if (location?.state) {
+            navigate(location.state);
+          } else {
+            navigate("/");
+          }
         });
       })
       .catch((error) => {

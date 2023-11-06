@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logoLight from "/assets/images/logo/logo_light.png";
 import ContinueWithSocialMedia from "./ContinueWithSocialMedia";
 import { useState } from "react";
@@ -10,6 +10,9 @@ const Registration = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const { createUserWithEmail } = useAuth();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
@@ -55,6 +58,12 @@ const Registration = () => {
           title: "Registration successful",
           showConfirmButton: false,
           timer: 1500,
+        }).then(() => {
+          if (location?.state) {
+            navigate(location.state);
+          } else {
+            navigate("/");
+          }
         });
       });
     } catch (error) {
