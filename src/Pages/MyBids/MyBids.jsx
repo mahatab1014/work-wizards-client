@@ -1,18 +1,35 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import BidCard from "./BidCard";
 import useAxios from "../../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const MyBids = () => {
   const { user } = useAuth();
   const [bidData, setBidData] = useState([]);
   const exios = useAxios();
 
+  const handleCompleteWork = (id) => {
+    const acceptStatus = { bid_status: "completed" };
+    exios.put(`/bid-status-update?id=${id}`, acceptStatus).then((data) => {
+      if (data.status === 200) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Order Completed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    });
+  };
+
   useEffect(() => {
     exios.get(`/job-bid?email=${user?.email}`).then((data) => {
       setBidData(data.data);
     });
-  }, [user, exios]);
+  }, [user, exios, handleCompleteWork]);
 
   return (
     <>
@@ -36,7 +53,11 @@ const MyBids = () => {
               </thead>
               <tbody>
                 {bidData.map((data) => (
-                  <BidCard key={data._id} data={data} />
+                  <BidCard
+                    key={data._id}
+                    data={data}
+                    handleCompleteWork={handleCompleteWork}
+                  />
                 ))}
               </tbody>
             </table>

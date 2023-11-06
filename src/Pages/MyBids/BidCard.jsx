@@ -1,5 +1,5 @@
-const BidCard = ({ data }) => {
-  const { bid_deadline, bid_status, bidder_email, job_info } = data;
+const BidCard = ({ data, handleCompleteWork }) => {
+  const { _id, bid_deadline, bid_status, bidder_email, job_info } = data;
 
   return (
     <>
@@ -9,11 +9,9 @@ const BidCard = ({ data }) => {
         <th>{bid_deadline}</th>
         <th className="capitalize">{bid_status}</th>
         <th>
-          <div
-            className="tooltip tooltip-left"
-            data-tip="Without accept your bid, you can't start/submit work"
-          >
+          {bid_status !== "completed" ? (
             <button
+              onClick={() => handleCompleteWork(_id)}
               className={
                 bid_status !== "in progress"
                   ? "primary-button !btn-sm btn-disabled"
@@ -22,7 +20,9 @@ const BidCard = ({ data }) => {
             >
               Complete
             </button>
-          </div>
+          ) : (
+            ""
+          )}
         </th>
       </tr>
     </>

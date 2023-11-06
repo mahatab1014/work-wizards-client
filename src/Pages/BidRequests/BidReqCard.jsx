@@ -22,26 +22,42 @@ const BidReqCard = ({ data, handleAcceptBidReq, handleRejectBidReq }) => {
         <th className="capitalize">${bidding_amount}</th>
         <th className="capitalize">{bid_status}</th>
         <th className="space-y-1 md:space-x-1">
-          {bid_status !== "canceled" ? (
+          {bid_status !== "canceled" && bid_status !== "completed" ? (
             <>
               <div
                 className="tooltip tooltip-left"
-                data-tip="After accept bid requset, seller start your work"
+                data-tip={
+                  bid_status !== "in progress"
+                    ? "After accept bid requset, seller start your work"
+                    : "Seller Working on your project"
+                }
               >
-                <button
-                  onClick={() => handleAcceptBidReq(_id)}
-                  className="primary-button !bg-success !btn-sm"
-                >
-                  Accept
-                </button>
+                {bid_status !== "in progress" ? (
+                  <button
+                    onClick={() => handleAcceptBidReq(_id)}
+                    className="primary-button !bg-success !btn-sm"
+                  >
+                    Accept
+                  </button>
+                ) : (
+                  <button className="primary-button !bg-success !btn-sm">
+                    Accepted
+                  </button>
+                )}
               </div>
               <div
-                className="tooltip tooltip-top"
-                data-tip="Reject bid request"
+                className="tooltip tooltip-left"
+                data-tip={
+                  bid_status !== "in progress" ? "Reject bid request" : "You can't reject now"
+                }
               >
                 <button
                   onClick={() => handleRejectBidReq(_id)}
-                  className="primary-button !btn-sm"
+                  className={
+                    bid_status === "in progress"
+                      ? "primary-button !btn-sm btn-disabled"
+                      : "primary-button !btn-sm"
+                  }
                 >
                   Reject
                 </button>
