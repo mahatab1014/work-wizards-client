@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+::-webkit-scrollbar {
+  width: 0;
+}
+
 .primary-button {
   @apply btn bg-primary-color hover:bg-primary-color text-white border-none normal-case;
 }

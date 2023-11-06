@@ -4,7 +4,7 @@ import PrimaryNav from "../Components/Navbar/PrimaryNav";
 const RootLayout = () => {
   return (
     <>
-      <header className="sticky top-0 z-[999]">
+      <header className="sticky top-0 z-[999] backdrop-blur-xl shadow-lg">
         <PrimaryNav />
       </header>
       <main className="container mx-auto px-5">
