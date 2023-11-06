@@ -1,10 +1,30 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const ContinueWithSocialMedia = () => {
   const { signInWithGoogle } = useAuth();
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleGoogleLogin = () => {
-    signInWithGoogle();
+    signInWithGoogle().then((user) => {
+      const userName = user.user.displayName;
+      Swal.fire({
+        title: `Login successful`,
+        html: `Welcome back! <strong>${userName}</strong>`,
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      }).then(() => {
+        if (location?.state) {
+          navigate(location.state);
+        } else {
+          navigate("/");
+        }
+      });
+    });
   };
 
   return (
