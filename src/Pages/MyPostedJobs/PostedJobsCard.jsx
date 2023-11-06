@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const PostedJobsCard = ({ post }) => {
+const PostedJobsCard = ({ post, handleDeleteJobs }) => {
   const {
     _id,
     user_name,
@@ -14,28 +14,18 @@ const PostedJobsCard = ({ post }) => {
     maximum_price,
   } = post;
 
-    const [showFullDescription, setShowFullDescription] = useState(false);
+  const [showFullDescription, setShowFullDescription] = useState(false);
 
-    const toggleDescription = () => {
-      setShowFullDescription(!showFullDescription);
-    };
+  const toggleDescription = () => {
+    setShowFullDescription(!showFullDescription);
+  };
 
   return (
-    <div className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <div className="px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
       <div className="flex items-center justify-between">
         <span className="text-sm font-light text-gray-600 dark:text-gray-400">
           {deadline}
         </span>
-        <div>
-          <Link
-            to={`/jobs/${_id}`}
-            className="primary-button !btn-sm"
-            tabIndex="0"
-            role="link"
-          >
-            Update Details
-          </Link>
-        </div>
       </div>
 
       <div className="mt-2">
@@ -77,7 +67,7 @@ const PostedJobsCard = ({ post }) => {
           </span>
         </div>
 
-        <div className="flex md:items-center justify-end">
+        {/* <div className="flex md:items-center justify-end">
           <img
             className="hidden object-cover w-10 h-10 mx-4 rounded-full md:block ml-0"
             src={user_photoURL}
@@ -90,7 +80,23 @@ const PostedJobsCard = ({ post }) => {
           >
             {user_name}
           </span>
-        </div>
+        </div> */}
+      </div>
+      <div className="space-x-2 text-end">
+        <Link
+          to={`/update-jobs-data/${_id}`}
+          className="primary-button-outline !text-primary-color hover:!text-white hover:border-transparent !btn-sm"
+          tabIndex="0"
+          role="link"
+        >
+          Update Details
+        </Link>
+        <button
+          onClick={() => handleDeleteJobs(_id)}
+          className="btn btn-warning btn-sm"
+        >
+          Delete
+        </button>
       </div>
     </div>
   );

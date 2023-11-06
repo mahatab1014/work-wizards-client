@@ -10,7 +10,7 @@ const JobDetails = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    exios.get(`/single-job-post?id=${id}`).then((data) => {
+    exios.get(`/single-job-data?id=${id}`).then((data) => {
       setData(data.data);
     });
   }, [id, exios]);

@@ -9,6 +9,7 @@ import BidRequests from "../Pages/BidRequests/BidRequests";
 import Login from "../Pages/Auth/Login";
 import Registration from "../Pages/Auth/Registration";
 import JobDetails from "../Pages/JobDetails/JobDetails";
+import UpdatePostedJobs from "../Pages/MyPostedJobs/UpdatePostedJobs";
 
 const PublicRoutes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const PublicRoutes = createBrowserRouter([
       {
         path: "my-posted-jobs",
         element: <MyPostedJobs />,
+      },
+      {
+        path: "update-jobs-data/:id",
+        element: <UpdatePostedJobs />
       },
       {
         path: "my-bids",
