@@ -15,7 +15,7 @@ const BidCard = ({ data }) => {
           >
             <button
               className={
-                bid_status === "pending"
+                bid_status !== "in progress"
                   ? "primary-button !btn-sm btn-disabled"
                   : "primary-button !btn-sm"
               }
