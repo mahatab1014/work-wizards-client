@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Tabs, { Tab } from "react-best-tabs";
 import "react-best-tabs/dist/index.css";
-import useAxiosS from "../../../Hooks/useAxios";
+import useAxios from "../../../Hooks/useAxios";
 import JobPostCard from "./JobPostCard";
 
 const BrowseByCategory = () => {
   const [postData, setPostData] = useState([]);
   const [category, setCategory] = useState("Web Development");
-  const exios = useAxiosS();
+  const exios = useAxios();
 
   useEffect(() => {
     exios.get(`/job-posts?category=${category}`).then((data) => {

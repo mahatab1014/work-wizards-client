@@ -9,6 +9,7 @@ const JobDetails = () => {
   const exios = useAxios();
   const { user } = useAuth();
   const [data, setData] = useState(null);
+  const [expire, setExpire] = useState(false);
 
   useEffect(() => {
     exios.get(`/single-job-data?id=${id}`).then((data) => {
@@ -54,6 +55,18 @@ const JobDetails = () => {
       })
       .catch((error) => console.error(error));
   };
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
+    const todayDate = `${year}-${month}-${day}`;
+
+    if (data?.deadline <= todayDate) {
+      setExpire(true);
+    }
+  }, [data?.deadline]);
 
   return (
     <>
@@ -102,6 +115,12 @@ const JobDetails = () => {
                 You can't bid on your own job.
               </p>
             </div>
+          ) : expire ? (
+            <div>
+              <p className="text-center py-2 bg-warning text-lg rounded-lg my-10">
+                Unfortunately, the deadline is now in the past
+              </p>
+            </div>
           ) : (
             <div>
               <p className="text-center py-2 bg-success text-lg rounded-lg my-10">
@@ -109,6 +128,7 @@ const JobDetails = () => {
               </p>
             </div>
           )}
+
           <form onSubmit={handleBidNow}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               <div>
@@ -201,6 +221,8 @@ const JobDetails = () => {
                 type="submit"
                 className={
                   user?.email === data?.user_email
+                    ? "primary-button btn-disabled"
+                    : expire
                     ? "primary-button btn-disabled"
                     : "primary-button"
                 }
