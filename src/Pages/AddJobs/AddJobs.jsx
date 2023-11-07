@@ -2,6 +2,7 @@ import Lottie from "lottie-react";
 import AddJobsLottie from "./add-jobs.json";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosS from "../../Hooks/useAxios";
+import Swal from "sweetalert2";
 const AddJobs = () => {
   const { user } = useAuth();
   const exios = useAxiosS();
@@ -34,7 +35,18 @@ const AddJobs = () => {
 
     exios
       .post("/job-post", postData)
-      .then((res) => console.log(res))
+      .then((res) => {
+        if (res.status === 200) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Jobs posted successfully",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        form.reset()
+      })
       .catch((err) => console.log(err));
   };
 
@@ -161,7 +173,7 @@ const AddJobs = () => {
           </div>
           <div className="flex justify-end mt-6">
             <button className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-              Save
+              Add Job
             </button>
           </div>
         </form>

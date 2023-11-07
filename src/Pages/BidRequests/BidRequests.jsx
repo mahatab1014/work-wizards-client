@@ -82,7 +82,7 @@ const BidRequests = () => {
                 </tr>
               </thead>
               <tbody>
-                {bidData.map((data) => (
+                {bidData?.map((data) => (
                   <BidReqCard
                     key={data._id}
                     data={data}
