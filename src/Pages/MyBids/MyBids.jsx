@@ -52,7 +52,7 @@ const MyBids = () => {
                 </tr>
               </thead>
               <tbody>
-                {bidData.map((data) => (
+                {bidData?.map((data) => (
                   <BidCard
                     key={data._id}
                     data={data}

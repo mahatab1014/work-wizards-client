@@ -23,22 +23,17 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       const userEmail = currentUser?.email || user?.email;
       const loggedUser = { email: userEmail };
-
       setUser(currentUser);
       setIsLoading(false);
 
       if (currentUser) {
-        axios
-          .post(`${web_config.backend_url}/jwt`, loggedUser, {
-            withCredentials: true,
-          })
-          .then((res) => {});
+        axios.post(`${web_config.backend_url}/jwt`, loggedUser, {
+          withCredentials: true,
+        });
       } else {
-        axios
-          .post(`${web_config.backend_url}/logout`, loggedUser, {
-            withCredentials: true,
-          })
-          .then((res) => {});
+        axios.post(`${web_config.backend_url}/logout`, loggedUser, {
+          withCredentials: true,
+        });
       }
     });
     return () => {
