@@ -3,15 +3,18 @@ import Tabs, { Tab } from "react-best-tabs";
 import "react-best-tabs/dist/index.css";
 import useAxios from "../../../Hooks/useAxios";
 import JobPostCard from "./JobPostCard";
+import Skeleton from "react-loading-skeleton";
 
 const BrowseByCategory = () => {
   const [postData, setPostData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [category, setCategory] = useState("Web Development");
   const exios = useAxios();
 
   useEffect(() => {
     exios.get(`/job-posts?category=${category}`).then((data) => {
       setPostData(data.data);
+      setIsLoading(false);
     });
   }, [exios, category]);
 
@@ -38,23 +41,110 @@ const BrowseByCategory = () => {
       >
         <Tab title="Web Development" className="mr-3">
           <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-5">
-            {postData?.map((post) => (
-              <JobPostCard key={post._id} post={post} />
-            ))}
+            {isLoading ? (
+              <>
+                {[1, 2, 3, 4].map((index) => (
+                  <div
+                    key={index}
+                    className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
+                  >
+                    <div className="flex justify-between">
+                      <Skeleton width={60} />
+                      <Skeleton width={100} />
+                    </div>
+                    <div>
+                      <Skeleton count={5} />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <Skeleton width={80} />
+                      <Skeleton width={80} />
+                      <div className="flex items-center gap-2">
+                        <Skeleton width={40} height={40} circle />
+                        <Skeleton width={80} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {postData?.map((post) => (
+                  <JobPostCard key={post._id} post={post} />
+                ))}
+              </>
+            )}
           </div>
         </Tab>
         <Tab title="Digital Marketing" className="mr-3">
           <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-5">
-            {postData?.map((post) => (
-              <JobPostCard key={post._id} post={post} />
-            ))}
+            {isLoading ? (
+              <>
+                {[1, 2, 3, 4].map((index) => (
+                  <div
+                    key={index}
+                    className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
+                  >
+                    <div className="flex justify-between">
+                      <Skeleton width={60} />
+                      <Skeleton width={100} />
+                    </div>
+                    <div>
+                      <Skeleton count={5} />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <Skeleton width={80} />
+                      <Skeleton width={80} />
+                      <div className="flex items-center gap-2">
+                        <Skeleton width={40} height={40} circle />
+                        <Skeleton width={80} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {postData?.map((post) => (
+                  <JobPostCard key={post._id} post={post} />
+                ))}
+              </>
+            )}
           </div>
         </Tab>
         <Tab title="Graphics Design" className="mr-3">
           <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-5">
-            {postData?.map((post) => (
-              <JobPostCard key={post._id} post={post} />
-            ))}
+            {isLoading ? (
+              <>
+                {[1, 2, 3, 4].map((index) => (
+                  <div
+                    key={index}
+                    className="max-w-2xl px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800"
+                  >
+                    <div className="flex justify-between">
+                      <Skeleton width={60} />
+                      <Skeleton width={100} />
+                    </div>
+                    <div>
+                      <Skeleton count={5} />
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <Skeleton width={80} />
+                      <Skeleton width={80} />
+                      <div className="flex items-center gap-2">
+                        <Skeleton width={40} height={40} circle />
+                        <Skeleton width={80} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {postData?.map((post) => (
+                  <JobPostCard key={post._id} post={post} />
+                ))}
+              </>
+            )}
           </div>
         </Tab>
       </Tabs>

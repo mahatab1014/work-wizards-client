@@ -4,10 +4,12 @@ import useAuth from "../../Hooks/useAuth";
 import BidCard from "./BidCard";
 import useAxios from "../../Hooks/useAxios";
 import Swal from "sweetalert2";
+import Skeleton from "react-loading-skeleton";
 
 const MyBids = () => {
   const { user } = useAuth();
   const [bidData, setBidData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const exios = useAxios();
 
   const handleCompleteWork = (id) => {
@@ -28,6 +30,7 @@ const MyBids = () => {
   useEffect(() => {
     exios.get(`/job-bid?email=${user?.email}`).then((data) => {
       setBidData(data.data);
+      setIsLoading(false);
     });
   }, [user, exios, handleCompleteWork]);
 
@@ -52,13 +55,39 @@ const MyBids = () => {
                 </tr>
               </thead>
               <tbody>
-                {bidData?.map((data) => (
-                  <BidCard
-                    key={data._id}
-                    data={data}
-                    handleCompleteWork={handleCompleteWork}
-                  />
-                ))}
+                {isLoading ? (
+                  <>
+                    {[1, 2, 3, 4].map((index) => (
+                      <tr key={index}>
+                        <th>
+                          <Skeleton />
+                        </th>
+                        <th>
+                          <Skeleton />
+                        </th>
+                        <th>
+                          <Skeleton />
+                        </th>
+                        <th className="capitalize">
+                          <Skeleton />
+                        </th>
+                        <th>
+                          <Skeleton />
+                        </th>
+                      </tr>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {bidData?.map((data) => (
+                      <BidCard
+                        key={data._id}
+                        data={data}
+                        handleCompleteWork={handleCompleteWork}
+                      />
+                    ))}
+                  </>
+                )}
               </tbody>
             </table>
           </div>

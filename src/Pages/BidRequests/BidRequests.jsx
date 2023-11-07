@@ -4,10 +4,13 @@ import useAuth from "../../Hooks/useAuth";
 import useAxios from "../../Hooks/useAxios";
 import BidReqCard from "./BidReqCard";
 import Swal from "sweetalert2";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const BidRequests = () => {
   const { user } = useAuth();
   const [bidData, setBidData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const exios = useAxios();
 
   const handleAcceptBidReq = (id) => {
@@ -58,6 +61,7 @@ const BidRequests = () => {
   useEffect(() => {
     exios.get(`/job-bid?company_email=${user?.email}`).then((data) => {
       setBidData(data.data);
+      setIsLoading(false);
     });
   }, [user, exios, handleAcceptBidReq, handleRejectBidReq]);
 
@@ -82,14 +86,43 @@ const BidRequests = () => {
                 </tr>
               </thead>
               <tbody>
-                {bidData?.map((data) => (
-                  <BidReqCard
-                    key={data._id}
-                    data={data}
-                    handleAcceptBidReq={handleAcceptBidReq}
-                    handleRejectBidReq={handleRejectBidReq}
-                  />
-                ))}
+                {isLoading ? (
+                  <>
+                    {[1, 2, 3, 4].map((index) => (
+                      <tr key={index}>
+                        <th>
+                          <Skeleton />
+                        </th>
+                        <th>
+                          <Skeleton />
+                        </th>
+                        <th>
+                          <Skeleton />
+                        </th>
+                        <th className="capitalize">
+                          <Skeleton />
+                        </th>
+                        <th>
+                          <Skeleton />
+                        </th>
+                        <th>
+                          <Skeleton />
+                        </th>
+                      </tr>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {bidData?.map((data) => (
+                      <BidReqCard
+                        key={data._id}
+                        data={data}
+                        handleAcceptBidReq={handleAcceptBidReq}
+                        handleRejectBidReq={handleRejectBidReq}
+                      />
+                    ))}
+                  </>
+                )}
               </tbody>
             </table>
           </div>
