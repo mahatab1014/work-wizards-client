@@ -17,6 +17,7 @@ import Img2 from "/assets/images/slider/good-faces-gy5SlRW9OGA-unsplash-min.jpg"
 import Img3 from "/assets/images/slider/marvin-meyer-SYTO3xs06fU-unsplash-min.jpg";
 import Img4 from "/assets/images/slider/rodeo-project-management-software-n9RU5cLZLKY-unsplash-min.jpg";
 import Img5 from "/assets/images/slider/sean-pollock-PhYq704ffdA-unsplash-min.jpg";
+import { Link } from "react-router-dom";
 
 const HeroSlider = () => {
   return (
@@ -53,8 +54,12 @@ const HeroSlider = () => {
                   whenever and wherever you need them.
                 </p>
                 <div className="space-x-3">
-                  <button className="primary-button">Find Jobs</button>
-                  <button className="primary-button-outline">Post Jobs</button>
+                  <Link to="/marketplace" className="primary-button">
+                    Find Jobs
+                  </Link>
+                  <Link to="/add-jobs" className="primary-button-outline">
+                    Post Jobs
+                  </Link>
                 </div>
               </div>
             </div>
@@ -81,8 +86,12 @@ const HeroSlider = () => {
                   whenever and wherever you need them.
                 </p>
                 <div className="space-x-3">
-                  <button className="primary-button">Find Jobs</button>
-                  <button className="primary-button-outline">Post Jobs</button>
+                  <Link to="/marketplace" className="primary-button">
+                    Find Jobs
+                  </Link>
+                  <Link to="/add-jobs" className="primary-button-outline">
+                    Post Jobs
+                  </Link>
                 </div>
               </div>
             </div>
@@ -110,8 +119,12 @@ const HeroSlider = () => {
                   whenever and wherever you need them.
                 </p>
                 <div className="space-x-3">
-                  <button className="primary-button">Find Jobs</button>
-                  <button className="primary-button-outline">Post Jobs</button>
+                  <Link to="/marketplace" className="primary-button">
+                    Find Jobs
+                  </Link>
+                  <Link to="/add-jobs" className="primary-button-outline">
+                    Post Jobs
+                  </Link>
                 </div>
               </div>
             </div>
@@ -138,8 +151,12 @@ const HeroSlider = () => {
                   whenever and wherever you need them.
                 </p>
                 <div className="space-x-3">
-                  <button className="primary-button">Find Jobs</button>
-                  <button className="primary-button-outline">Post Jobs</button>
+                  <Link to="/marketplace" className="primary-button">
+                    Find Jobs
+                  </Link>
+                  <Link to="/add-jobs" className="primary-button-outline">
+                    Post Jobs
+                  </Link>
                 </div>
               </div>
             </div>

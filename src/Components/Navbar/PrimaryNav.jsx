@@ -68,7 +68,11 @@ const PrimaryNav = () => {
           </div>
         </div>
         <Link to="/" className="">
-          <img src={logoLight} alt="" className="w-4/5 sm:w-3/5 md:w-2/5" />
+          <img
+            src={logoLight}
+            alt=""
+            className="w-4/5 sm:w-3/5 md:w-2/5 lg:w-3/5 xl:w-2/5"
+          />
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -77,7 +81,9 @@ const PrimaryNav = () => {
       <div className="navbar-end">
         {user ? (
           <>
-          <span className="hidden sm:inline-block text-lg font-semibold uppercase mr-1">{user?.displayName.split(" ")[0]}</span>
+            <span className="hidden sm:inline-block font-medium uppercase mr-1">
+              {user?.displayName.split(" ")[0]}
+            </span>
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full ring ring-current">
