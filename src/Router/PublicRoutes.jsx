@@ -11,6 +11,7 @@ import Registration from "../Pages/Auth/Registration";
 import JobDetails from "../Pages/JobDetails/JobDetails";
 import UpdatePostedJobs from "../Pages/MyPostedJobs/UpdatePostedJobs";
 import PrivateRoutes from "./PrivateRoutes";
+import Marketplace from "../Pages/Marketplace/Marketplace";
 
 const PublicRoutes = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const PublicRoutes = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "marketplace",
+        element: <Marketplace />
       },
       {
         path: "add-jobs",

@@ -20,7 +20,7 @@ import Img5 from "/assets/images/slider/sean-pollock-PhYq704ffdA-unsplash-min.jp
 
 const HeroSlider = () => {
   return (
-    <section className="">
+    <section className="mt-5">
       <Swiper
         spaceBetween={30}
         effect="fade"
