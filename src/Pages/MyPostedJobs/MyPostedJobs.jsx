@@ -4,6 +4,7 @@ import useAuth from "../../Hooks/useAuth";
 import PostedJobsCard from "./PostedJobsCard";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
+import { Helmet } from "react-helmet-async";
 
 const MyPostedJobs = () => {
   const { user } = useAuth();
@@ -50,6 +51,9 @@ const MyPostedJobs = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Posted Jobs | WorkWizards</title>
+      </Helmet>
       <section>
         <div className="section-title mt-5">
           <h2>My Posted Jobs</h2>

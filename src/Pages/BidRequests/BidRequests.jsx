@@ -6,6 +6,7 @@ import BidReqCard from "./BidReqCard";
 import Swal from "sweetalert2";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { Helmet } from "react-helmet-async";
 
 const BidRequests = () => {
   const { user } = useAuth();
@@ -67,6 +68,9 @@ const BidRequests = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Bid Requests | WorkWizards</title>
+      </Helmet>
       <section>
         <div className="section-title mt-5">
           <h2>Bid Requset</h2>

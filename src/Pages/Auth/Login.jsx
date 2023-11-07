@@ -5,6 +5,9 @@ import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import SpinnerLoader from "../../Components/LoadingAnimation/SpinnerLoader";
+import { Helmet } from "react-helmet-async";
+
+
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -55,6 +58,9 @@ const Login = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Login | WorkWizards</title>
+      </Helmet>
       {user ? (
         <section>
           <div>

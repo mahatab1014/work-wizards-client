@@ -5,6 +5,7 @@ import BidCard from "./BidCard";
 import useAxios from "../../Hooks/useAxios";
 import Swal from "sweetalert2";
 import Skeleton from "react-loading-skeleton";
+import { Helmet } from "react-helmet-async";
 
 const MyBids = () => {
   const { user } = useAuth();
@@ -36,6 +37,9 @@ const MyBids = () => {
 
   return (
     <>
+      <Helmet>
+        <title>My Bids | WorkWizards</title>
+      </Helmet>
       <section>
         <div className="section-title mt-5">
           <h2>My Bids</h2>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import SpinnerLoader from "../../Components/LoadingAnimation/SpinnerLoader";
+import { Helmet } from "react-helmet-async";
 
 const Registration = () => {
   const [confirmPass, setConformPass] = useState("");
@@ -80,6 +81,9 @@ const Registration = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Registration | WorkWizards</title>
+      </Helmet>
       {user ? (
         <section>
           <div>

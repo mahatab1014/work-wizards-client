@@ -3,6 +3,7 @@ import "react-best-tabs/dist/index.css";
 import JobPostCard from "../Home/BrowseByCategory/JobPostCard";
 import useAxios from "../../Hooks/useAxios";
 import Skeleton from "react-loading-skeleton";
+import { Helmet } from "react-helmet-async";
 
 const Marketplace = () => {
   const [postData, setPostData] = useState([]);
@@ -18,6 +19,9 @@ const Marketplace = () => {
 
   return (
     <section className="py-10">
+      <Helmet>
+        <title>Marketplace | WorkWizards</title>
+      </Helmet>
       <div className="section-title">
         <h2>Discover Jobs</h2>
         <p>

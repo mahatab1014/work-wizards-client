@@ -4,6 +4,7 @@ import useAxios from "../../Hooks/useAxios";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineRollback } from "react-icons/ai";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const UpdatePostedJobs = () => {
   const exios = useAxios();
@@ -76,6 +77,9 @@ const UpdatePostedJobs = () => {
 
   return (
     <section>
+      <Helmet>
+        <title>Update Data | WorkWizards</title>
+      </Helmet>
       <div className="py-10">
         <div className="section-title ">
           <h2>Update Jobs Data</h2>

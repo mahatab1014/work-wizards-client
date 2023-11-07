@@ -3,6 +3,7 @@ import AddJobsLottie from "./add-jobs.json";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosS from "../../Hooks/useAxios";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const AddJobs = () => {
   const { user } = useAuth();
   const exios = useAxiosS();
@@ -52,6 +53,9 @@ const AddJobs = () => {
 
   return (
     <section className="bg-white dark:bg-gray-800 pb-10">
+      <Helmet>
+        <title>Post Job | WorkWizards</title>
+      </Helmet>
       <div className="max-w-4xl mt-10 p-6 mx-auto rounded-md shadow-md ">
         <div className="pb-8 md:flex items-center">
           <div className="section-title">

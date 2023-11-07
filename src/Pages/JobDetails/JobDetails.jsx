@@ -3,6 +3,7 @@ import useAxios from "../../Hooks/useAxios";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -70,6 +71,9 @@ const JobDetails = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{`${data?.job_title} | WorkWizards`}</title>
+      </Helmet>
       <section>
         <div className="max-w-5xl m-auto shadow-lg px-5 rounded-box py-10">
           <div className="text-center space-y-5 mb-10">
