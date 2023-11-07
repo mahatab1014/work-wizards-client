@@ -10,6 +10,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "../Firebase/firebase.config";
+import axios from "axios";
+import web_config from "../web_config";
 
 export const AuthContext = createContext(null);
 const auth = getAuth(app);
@@ -18,41 +20,57 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-        setIsLoading(false);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+
+      setUser(currentUser);
+      setIsLoading(false);
+
+      if (currentUser) {
+        axios
+          .post(`${web_config.backend_url}/jwt`, loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {});
       } else {
-        setUser(null);
-        setIsLoading(false);
+        axios
+          .post(`${web_config.backend_url}/logout`, loggedUser, {
+            withCredentials: true,
+          })
+          .then((res) => {});
       }
     });
-    return () => unsubscribe();
-  }, []);
+    return () => {
+      return unsubscribe();
+    };
+  }, [user?.email]);
 
-  console.log(user)
-
-const createUserWithEmail = async (email, password, name, photoURL) => {
-  setIsLoading(true);
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    const user = userCredential.user;
+  const createUserWithEmail = async (email, password, name, photoURL) => {
+    setIsLoading(true);
     try {
-      await updateProfile(user, {
-        displayName: name,
-        photoURL: photoURL,
-      });
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      try {
+        await updateProfile(user, {
+          displayName: name,
+          photoURL: photoURL,
+        });
+        setIsLoading(false);
+        return user;
+      } catch (error) {
+        setIsLoading(false);
+        throw error;
+      }
+    } catch (error_1) {
       setIsLoading(false);
-      return user;
-    } catch (error) {
-      setIsLoading(false);
-      throw error;
+      throw error_1;
     }
-  } catch (error_1) {
-    setIsLoading(false);
-    throw error_1;
-  }
-};
+  };
 
   const loginUserWithEmailAndPassword = (email, password) => {
     setIsLoading(true);

@@ -2,9 +2,10 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
+import web_config from "../web_config";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000/api/v1/",
+  baseURL: web_config.backend_url,
   withCredentials: true,
 });
 
